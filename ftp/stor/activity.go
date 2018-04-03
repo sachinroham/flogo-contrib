@@ -27,7 +27,7 @@ const (
 	ovResult   = "result"
 )
 
-// STORActivity is an Activity that is used to list filed from Google Drive
+// STORActivity is an Activity is used to store a file on FTP server
 // inputs : {host,port,user,password,path,content}
 // outputs: {result}
 type STORActivity struct {

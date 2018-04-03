@@ -3,8 +3,8 @@
 	"type": "flogo:activity",
 	"ref": "github.com/sachinroham/flogo-contrib/ftp/stor",
 	"version": "0.0.1",
-	"title": "FTP Get",
-	"description": "FTP Get",
+	"title": "FTP PUT",
+	"description": "FTP PUT",
 	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/ftp/stor",
 	"input": [
 		{
