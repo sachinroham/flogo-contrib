@@ -1,4 +1,4 @@
-package stor
+package retr
 
 import (
 	"fmt"
