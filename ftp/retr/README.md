@@ -10,7 +10,7 @@ This activity invokes a FTP PUT command.
 
 ### Flogo CLI
 ```bash
-flogo add activity github.com/sachinroham/flogo-contrib/ftp/stor
+flogo add activity github.com/sachinroham/flogo-contrib/ftp/retr
 ```
 
 ## Schema
