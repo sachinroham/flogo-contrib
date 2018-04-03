@@ -1,0 +1,27 @@
+{
+  "name": "gdrive-list",
+  "type": "flogo:activity",
+  "ref": "github.com/TIBCOSoftware/flogo-contrib/activity/rest",
+  "version": "0.0.1",
+  "title": "List Files Service",
+  "description": "List Files from Google Drive",
+  "homepage": "https://github.com/TIBCOSoftware/flogo-contrib/tree/master/activity/rest",
+  "input":[
+    {
+      "name": "authorizatonCode",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "pageSize",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "output": [
+    {
+      "name": "result",
+      "type": "any"
+    }
+  ]
+}
