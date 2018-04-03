@@ -1,0 +1,47 @@
+{
+	"name": "ftp-stor",
+	"type": "flogo:activity",
+	"ref": "github.com/sachinroham/flogo-contrib/ftp/stor",
+	"version": "0.0.1",
+	"title": "FTP Get",
+	"description": "FTP Get",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/gdrive/listfiles",
+	"input": [
+		{
+			"name": "host",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "port",
+			"type": "integer",
+			"required": false
+		},
+		{
+			"name": "user",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "password",
+			"type": "string",
+			"required": false
+		},
+		{
+			"name": "path",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "content",
+			"type": "any",
+			"required": true
+		}
+	],
+	"output": [
+		{
+			"name": "result",
+			"type": "any"
+		}
+	]
+}
