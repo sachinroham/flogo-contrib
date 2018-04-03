@@ -5,7 +5,7 @@
 	"version": "0.0.1",
 	"title": "FTP Get",
 	"description": "FTP Get",
-	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/gdrive/listfiles",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/ftp/stor",
 	"input": [
 		{
 			"name": "host",
