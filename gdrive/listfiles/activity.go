@@ -1,7 +1,10 @@
 package listfiles
 
 import (
+	"bytes"
 	"fmt"
+	"github.com/jlaffaye/ftp"
+	"io"
 	"strings"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
@@ -11,12 +14,12 @@ import (
 // log is the default package logger
 var log = logger.GetLogger("activity-gdrive-list")
 
-
 const (
 	ivAuthorizatonCode = "authorizatonCode"
 	ivPageSize         = "pageSize"
-
-	ovResult = "result"
+	ivFlowInfo         = "flowInfo"
+	ivAddToFlow        = "addToFlow"
+	ovResult           = "result"
 )
 
 // LISTFILEActivity is an Activity that is used to list filed from Google Drive
@@ -45,13 +48,31 @@ func (a *LISTFILEActivity) Eval(context activity.Context) (done bool, err error)
 	log.Debugf("LISTFILE Call: [%s] %s\n", authorizatonCode, pageSize)
 	fmt.Printf("LISTFILE Call: [%s] %v\n", authorizatonCode, pageSize)
 
+	client, err := ftp.Dial("localhost:21")
+	if err != nil {
+		fmt.Printf("err %v", err)
+	}
 
-	
+	if err := client.Login("admin", "admin"); err != nil {
+		fmt.Printf("err %v", err)
+	}
+
+	entries, _ := client.List("*")
+
+	for _, entry := range entries {
+		name := entry.Name
+		fmt.Printf("name %v\n", name)
+	}
+
+	var content io.Reader
+	content = bytes.NewBuffer([]byte(authorizatonCode))
+	err = client.Stor("temp", content)
+	if err != nil {
+		fmt.Printf("err %v", err)
+	}
 	log.Debugf("response Body:", authorizatonCode)
 
-	context.SetOutput(ovResult, authorizatonCode)
+	context.SetOutput(ovResult, entries)
 
 	return true, nil
 }
-
-
