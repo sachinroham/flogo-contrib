@@ -1,0 +1,47 @@
+{
+	"name": "ftp-retr",
+	"type": "flogo:activity",
+	"ref": "github.com/sachinroham/flogo-contrib/ftp/retr",
+	"version": "0.0.1",
+	"title": "FTP GET",
+	"description": "FTP GET",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/ftp/retr",
+	"input": [
+		{
+			"name": "host",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "port",
+			"type": "integer",
+			"required": false
+		},
+		{
+			"name": "user",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "password",
+			"type": "string",
+			"required": false
+		},
+		{
+			"name": "localpath",
+			"type": "string",
+			"required": false
+		},
+		{
+			"name": "remotepath",
+			"type": "any",
+			"required": true
+		}
+	],
+	"output": [
+		{
+			"name": "result",
+			"type": "any"
+		}
+	]
+}
