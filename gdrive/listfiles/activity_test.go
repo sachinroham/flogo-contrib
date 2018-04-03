@@ -1,7 +1,6 @@
-package rest
+package listfiles
 
 import (
-	"encoding/json"
 	"fmt"
 	"testing"
 

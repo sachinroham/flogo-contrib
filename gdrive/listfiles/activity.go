@@ -1,16 +1,10 @@
 package listfiles
 
 import (
-	"bytes"
-	"crypto/tls"
-	"encoding/json"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
-	"os"
 	"strings"
 
 	"golang.org/x/net/context"
@@ -23,7 +17,7 @@ import (
 )
 
 // log is the default package logger
-var log = logger.GetLogger("activity-tibco-rest")
+var log = logger.GetLogger("activity-gdrive-list")
 
 const (
 	ivAuthorizatonCode = "authorizatonCode"
@@ -32,7 +26,6 @@ const (
 	ovResult = "result"
 )
 
-var validMethods = []string{methodGET, methodPOST, methodPUT, methodPATCH, methodDELETE}
 
 // LISTFILEActivity is an Activity that is used to list filed from Google Drive
 // inputs : {authorizatonCode,pageSize}
