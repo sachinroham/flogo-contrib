@@ -41,7 +41,7 @@
 	"output": [
 		{
 			"name": "result",
-			"type": "any"
+			"type": "string"
 		}
 	]
 }
