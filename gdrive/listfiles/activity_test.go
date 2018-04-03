@@ -18,7 +18,7 @@ func getActivityMetadata() *activity.Metadata {
 	if activityMetadata == nil {
 		jsonMetadataBytes, err := ioutil.ReadFile("activity.json")
 		if err != nil {
-			panic("No Json Metadata found for activity.json path")
+			panic("No Json yes Metadata found for activity.json path")
 		}
 
 		activityMetadata = activity.NewMetadata(string(jsonMetadataBytes))
@@ -38,7 +38,7 @@ func TestCreate(t *testing.T) {
 	}
 }
 
-var authCode ="ya29.GluRBdk5mVFLYH_hSQBo66LDINkzf0-1Jfe6T9fDIxKpvWDezuHfMtaghoQH409ovB6cFLryRV3SRPTp94uQ7psY8k6a9z1tjZXZUDAs2md9Zg1-inhjWUxexOcv"
+var authCode ="4/AABG7LzFoavN3qP6Efn4N2Upawq3McJ2BC9RToriU8EsCYTYW5-W7rE"
 
 func TestListFiles(t *testing.T) {
 

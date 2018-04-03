@@ -3,7 +3,6 @@ package listfiles
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strings"
 
@@ -26,7 +25,6 @@ const (
 	ovResult = "result"
 )
 
-
 // LISTFILEActivity is an Activity that is used to list filed from Google Drive
 // inputs : {authorizatonCode,pageSize}
 // outputs: {result}
@@ -45,40 +43,50 @@ func (a *LISTFILEActivity) Metadata() *activity.Metadata {
 }
 
 // Eval implements api.Activity.Eval - Invokes a LISTFILE Operation
-func (a *LISTFILEActivity) Eval(context activity.Context) (done bool, err error) {
+func (a *LISTFILEActivity) Eval(context1 activity.Context) (done bool, err error) {
 
-	authorizatonCode := strings.ToUpper(context.GetInput(ivAuthorizatonCode).(string))
-	pageSize := context.GetInput(ivPageSize).(int)
+	authorizatonCode := strings.ToUpper(context1.GetInput(ivAuthorizatonCode).(string))
+	pageSize := context1.GetInput(ivPageSize).(int)
 
 	log.Debugf("LISTFILE Call: [%s] %s\n", authorizatonCode, pageSize)
-
-	log.Debug("response Body:", result)
-
-	context.SetOutput(ovResult, result)
-	context.SetOutput(ovStatus, resp.StatusCode)
+	fmt.Printf("LISTFILE Call: [%s] %v\n", authorizatonCode, pageSize)
 
 	b, err := ioutil.ReadFile("client_secret.json")
 	if err != nil {
-		log.Fatalf("Unable to read client secret file: %v", err)
+		log.Debugf("Unable to read client secret file: %v\n", err)
+		fmt.Printf("Unable to read client secret file: %v\n", err)
 	}
 
+	//	fmt.Printf("b: %v \n", b)
 	// If modifying these scopes, delete your previously saved client_secret.json.
 	config, err := google.ConfigFromJSON(b, drive.DriveMetadataReadonlyScope)
 	if err != nil {
-		log.Fatalf("Unable to parse client secret file to config: %v", err)
+		log.Debugf("Unable to parse client secret file to config: %v\n", err)
+		fmt.Printf("Unable to parse client secret file to config: %v\n", err)
 	}
+	fmt.Printf("config: %v \n", config)
 
-	srv, err := drive.New(getClient(config, authorizatonCode))
+	tok, err := config.Exchange(oauth2.NoContext, authorizatonCode)
 	if err != nil {
-		log.Fatalf("Unable to retrieve Drive client: %v", err)
+		log.Debugf("Unable to validate token %v\n", err)
+		fmt.Printf("Unable to validate token %v\n", err)
 	}
 
-	r, err := srv.Files.List().PageSize(pageSize).
+	client := config.Client(context.Background(), tok)
+
+	srv, err := drive.New(client)
+	if err != nil {
+		log.Debugf("Unable to retrieve Drive client: %v\n", err)
+		fmt.Printf("Unable to retrieve Drive client: %v\n", err)
+	}
+	fmt.Printf("srv: %v \n", srv)
+
+	r, err := srv.Files.List().PageSize(10).
 		Fields("nextPageToken, files(id, name)").Do()
 	if err != nil {
-		log.Fatalf("Unable to retrieve files: %v", err)
+		log.Debugf("Unable to retrieve files: %v\n", err)
 	}
-	fmt.Println("Files:")
+	fmt.Printf("Files: %v \n", r)
 	if len(r.Files) == 0 {
 		fmt.Println("No files found.")
 	} else {
@@ -87,9 +95,9 @@ func (a *LISTFILEActivity) Eval(context activity.Context) (done bool, err error)
 		}
 	}
 
-	log.Debug("response Body:", r)
+	log.Debugf("response Body:", r)
 
-	context.SetOutput(ovResult, r)
+	context1.SetOutput(ovResult, r)
 
 	return true, nil
 }
@@ -100,9 +108,13 @@ func (a *LISTFILEActivity) Eval(context activity.Context) (done bool, err error)
 // returns the generated client.
 func getClient(config *oauth2.Config, token string) *http.Client {
 
+	fmt.Printf("token %s\n", token)
+
 	tok, err := config.Exchange(oauth2.NoContext, token)
 	if err != nil {
-		log.Fatalf("Unable to validate token %v", err)
+		log.Debugf("Unable to validate token %v\n", err)
+		fmt.Printf("Unable to validate token %v\n", err)
 	}
+
 	return config.Client(context.Background(), tok)
 }
