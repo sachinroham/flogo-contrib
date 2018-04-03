@@ -80,7 +80,7 @@ func (a *STORActivity) Eval(context activity.Context) (done bool, err error) {
 	if _, err := io.ReadFull(resp, buffer); err != nil {
 		fmt.Println("error:", err)
 	}
-	fmt.Printf("buffer %s", buffer)
+	fmt.Printf("buffer %s\n", buffer)
 	
 	context.SetOutput(ovResult, buffer)
 	return true, nil
