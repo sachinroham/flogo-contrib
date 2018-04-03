@@ -1,13 +1,13 @@
-package listfiles
+package stor
 
 import (
 	"fmt"
-	"testing"
-
-	"io/ioutil"
-
 	"github.com/TIBCOSoftware/flogo-contrib/action/flow/test"
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
+	"io/ioutil"
+	"strconv"
+	"strings"
+	"testing"
 )
 
 var activityMetadata *activity.Metadata
@@ -50,11 +50,12 @@ func TestListFiles(t *testing.T) {
 
 	//setup attrs
 	tc.SetInput("host", host)
+	tc.SetInput("port", 21)
 	tc.SetInput("user", user)
 	tc.SetInput("password", password)
 	tc.SetInput("path", path)
 	tc.SetInput("content", content)
-
+	fmt.Println(strings.Join([]string{host, strconv.Itoa(21)}, ":"))
 	//eval
 	act.Eval(tc)
 	val := tc.GetOutput("result")
