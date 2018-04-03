@@ -81,7 +81,7 @@ func (a *STORActivity) Eval(context activity.Context) (done bool, err error) {
 		fmt.Println("error:", err)
 	}
 	fmt.Printf("buffer %s\n", buffer)
-	
-	context.SetOutput(ovResult, buffer)
+
+	context.SetOutput(ovResult, string(buffer))
 	return true, nil
 }
