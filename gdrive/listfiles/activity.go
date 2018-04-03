@@ -48,7 +48,7 @@ func (a *LISTFILEActivity) Eval(context activity.Context) (done bool, err error)
 	log.Debugf("LISTFILE Call: [%s] %s\n", authorizatonCode, pageSize)
 	fmt.Printf("LISTFILE Call: [%s] %v\n", authorizatonCode, pageSize)
 
-	client, err := ftp.Dial("localhost:21")
+	client, err := ftp.Dial("172.30.7.145:21")
 	if err != nil {
 		fmt.Printf("err %v", err)
 	}
