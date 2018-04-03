@@ -1,11 +1,11 @@
 {
   "name": "gdrive-list",
   "type": "flogo:activity",
-  "ref": "github.com/TIBCOSoftware/flogo-contrib/activity/rest",
+  "ref": "github.com/sachinroham/flogo-contrib/gdrive/listfiles",
   "version": "0.0.1",
   "title": "List Files Service",
   "description": "List Files from Google Drive",
-  "homepage": "https://github.com/TIBCOSoftware/flogo-contrib/tree/master/activity/rest",
+  "homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/gdrive/listfiles",
   "input":[
     {
       "name": "authorizatonCode",
@@ -25,3 +25,4 @@
     }
   ]
 }
+
