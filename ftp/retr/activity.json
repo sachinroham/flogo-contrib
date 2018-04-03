@@ -34,7 +34,7 @@
 		},
 		{
 			"name": "remotepath",
-			"type": "any",
+			"type": "string",
 			"required": true
 		}
 	],
