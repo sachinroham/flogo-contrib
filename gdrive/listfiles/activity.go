@@ -96,9 +96,9 @@ func (a *LISTFILEActivity) Eval(context1 activity.Context) (done bool, err error
 //	}
 
 	
-	log.Debugf("response Body:", config)
+	log.Debugf("response Body:", authorizatonCode)
 
-	context1.SetOutput(ovResult, config)
+	context1.SetOutput(ovResult, authorizatonCode)
 
 	return true, nil
 }
