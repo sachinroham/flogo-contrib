@@ -33,7 +33,7 @@ Inputs and Outputs:
   "output": [
     {
       "name": "result",
-      "type": "any"
+      "type": "String"
     }
   ]
 }
