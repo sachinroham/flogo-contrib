@@ -87,17 +87,18 @@ func (a *LISTFILEActivity) Eval(context1 activity.Context) (done bool, err error
 		log.Debugf("Unable to retrieve files: %v\n", err)
 	}
 	fmt.Printf("Files: %v \n", r)
-	if len(r.Files) == 0 {
-		fmt.Println("No files found.")
-	} else {
-		for _, i := range r.Files {
-			fmt.Printf("%s (%s)\n", i.Name, i.Id)
-		}
-	}
+//	if len(r.Files) == 0 {
+//		fmt.Println("No files found.")
+//	} else {
+//		for _, i := range r.Files {
+//			fmt.Printf("%s (%s)\n", i.Name, i.Id)
+//		}
+//	}
 
-	log.Debugf("response Body:", r)
+	
+	log.Debugf("response Body:", config)
 
-	context1.SetOutput(ovResult, r)
+	context1.SetOutput(ovResult, config)
 
 	return true, nil
 }
