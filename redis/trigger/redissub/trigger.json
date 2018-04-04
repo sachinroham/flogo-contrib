@@ -12,17 +12,17 @@
   "output": [
     {
       "name": "context",
-      "type": "object"
+      "type": "string"
     },
     {
       "name": "evt",
-      "type": "object"
+      "type": "string"
     }
   ],
   "reply": [
     {
       "name": "data",
-      "type": "object"
+      "type": "string"
     }
   ]
 }
