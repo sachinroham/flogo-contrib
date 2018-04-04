@@ -45,18 +45,18 @@ func (t *RedisTrigger) Metadata() *trigger.Metadata {
 func (t *RedisTrigger) Initialize(ctx trigger.InitContext) error {
 	t.handlers = ctx.GetHandlers()
 	syslog.Println("init")
-	syslog.Println("Processing handlers")
-	for _, handler := range t.handlers {
-
-		syslog.Println("Init Hadler", handler)
-		t.processMessage(handler)
-	}
 
 	return nil
 }
 
 func (t *RedisTrigger) Start() error {
 	syslog.Println("Start")
+	syslog.Println("Processing handlers")
+	for _, handler := range t.handlers {
+
+		syslog.Println("Init Hadler", handler)
+		t.processMessage(handler)
+	}
 	
 	return nil
 
@@ -106,15 +106,3 @@ func (t *RedisTrigger) Stop() error {
 	return nil
 }
 
-//func Invoke() (interface{}, error) {
-//
-//	log.Info("Starting AWS Redis Trigger")
-//	syslog.Println("Starting AWS Redis Trigger")
-//
-//	return nil,nil
-//}
-
-//func run(t *RedisTrigger) error {
-//	syslog.Println("run")
-//	return nil
-//}
