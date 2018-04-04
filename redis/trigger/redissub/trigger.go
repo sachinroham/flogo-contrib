@@ -87,8 +87,8 @@ func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 			syslog.Println("received", msg.Payload, "from", msg.Channel)
 			syslog.Println("Executing \"Once\" timer trigger")
 			data := map[string]interface{}{
-				"context": msg.Payload,
-				"evt":     msg.Payload,
+				"context": "test",
+				"evt":     "value",
 			}
 			_, err := endpoint.Handle(context.Background(), data)
 			if err != nil {
