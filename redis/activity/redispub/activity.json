@@ -3,8 +3,8 @@
 	"type": "flogo:activity",
 	"ref": "github.com/sachinroham/flogo-contrib/redis/activity/redispub",
 	"version": "0.0.1",
-	"title": "FTP GET",
-	"description": "FTP GET",
+	"title": "Redis Publish",
+	"description": "Redis Publish",
 	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/activity/redispub",
 	"input": [
 		{
