@@ -1,12 +1,10 @@
 package redissub
 
 import (
-
 	syslog "log"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/trigger"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
-
 )
 
 // log is the default package logger
@@ -47,22 +45,19 @@ func (t *RedisTrigger) Initialize(ctx trigger.InitContext) error {
 	return nil
 }
 
-func Invoke() (interface{}, error) {
-
-	log.Info("Starting AWS Redis Trigger")
-	syslog.Println("Starting AWS Redis Trigger")
-
-	return nil,nil
-}
-
-func run(t *RedisTrigger) error {
-	syslog.Println("run")
-	return nil
-}
-
-
 func (t *RedisTrigger) Start() error {
 	syslog.Println("Start")
+	handlers := t.handlers
+
+	syslog.Println("Processing handlers")
+	for _, handler := range handlers {
+
+		syslog.Println("Init Hadler",handler)
+		
+	}
+
+	return nil
+	
 	return nil
 }
 
@@ -71,3 +66,16 @@ func (t *RedisTrigger) Stop() error {
 	syslog.Println("Stop")
 	return nil
 }
+
+//func Invoke() (interface{}, error) {
+//
+//	log.Info("Starting AWS Redis Trigger")
+//	syslog.Println("Starting AWS Redis Trigger")
+//
+//	return nil,nil
+//}
+
+//func run(t *RedisTrigger) error {
+//	syslog.Println("run")
+//	return nil
+//}
