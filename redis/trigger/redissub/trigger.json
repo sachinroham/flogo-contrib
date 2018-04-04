@@ -1,28 +1,45 @@
 {
-  "name": "flogo-redis",
-  "type": "flogo:trigger",
-  "shim": "plugin",
-  "ref": "github.com/sachinroham/flogo-contrib/redis/trigger/redissub",
-  "version": "0.0.1",
-  "title": "Redis Topic Subscriber",
-  "description": "Redis Topic Subscriber",
-  "homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/trigger/redissub",
-  "settings": [
-  ],
-  "output": [
-    {
-      "name": "context",
-      "type": "string"
-    },
-    {
-      "name": "evt",
-      "type": "string"
-    }
-  ],
-  "reply": [
-    {
-      "name": "data",
-      "type": "string"
-    }
-  ]
+	"name": "flogo-redis",
+	"type": "flogo:trigger",
+	"shim": "plugin",
+	"ref": "github.com/sachinroham/flogo-contrib/redis/trigger/redissub",
+	"version": "0.0.1",
+	"title": "Redis Channel Subscriber",
+	"description": "Redis Topic Subscriber",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/trigger/redissub",
+	"settings": [
+		{
+			"name": "host",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "port",
+			"type": "int",
+			"required": true
+		},
+		{
+			"name": "password",
+			"type": "string",
+			"required": false
+		},
+		{
+			"name": "channel",
+			"type": "string",
+			"required": true
+		}
+	],
+	"output": [
+		{
+			"name": "message",
+			"type": "string"
+		},
+		{
+			"name": "channel",
+			"type": "string"
+		}
+	],
+	"reply": [
+		
+	]
 }

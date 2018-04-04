@@ -57,7 +57,7 @@ func (t *RedisTrigger) Start() error {
 		syslog.Println("Init Hadler", handler)
 		t.processMessage(handler)
 	}
-	
+
 	return nil
 
 }
@@ -66,9 +66,9 @@ func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 	syslog.Println("Inside processMessage")
 
 	client := redis.NewClient(&redis.Options{
-		Addr:     "127.0.0.1:6379",
-		Password: "", // no password set
-		DB:       0,  // use default DB
+		Addr:     t.config.GetSetting("host") + ":" + t.config.GetSetting("port"),
+		Password: "" + t.config.GetSetting("password"), // no password set
+		DB:       0,                                    // use default DB
 	})
 
 	pubsub := client.Subscribe("redisChat")
@@ -78,17 +78,14 @@ func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 		// ReceiveTimeout is a low level API. Use ReceiveMessage instead.
 		msgi, err := pubsub.ReceiveTimeout(time.Second)
 		if err != nil {
-			//			fmt.Println("err ",err )
-			//			break
 		}
 
 		switch msg := msgi.(type) {
 		case *redis.Message:
 			syslog.Println("received", msg.Payload, "from", msg.Channel)
-			syslog.Println("Executing \"Once\" timer trigger")
 			data := map[string]interface{}{
-				"context": "test",
-				"evt":     "value",
+				"message": msg.Payload,
+				"channel": msg.Channel,
 			}
 			_, err := endpoint.Handle(context.Background(), data)
 			if err != nil {
@@ -105,4 +102,3 @@ func (t *RedisTrigger) Stop() error {
 	syslog.Println("Stop")
 	return nil
 }
-
