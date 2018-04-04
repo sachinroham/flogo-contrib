@@ -4,8 +4,8 @@
   "shim": "plugin",
   "ref": "github.com/sachinroham/flogo-contrib/redis/trigger/redissub",
   "version": "0.0.1",
-  "title": "Start Flow as ",
-  "description": "Simple Lambda Trigger",
+  "title": "Redis Topic Subscriber",
+  "description": "Redis Topic Subscriber",
   "homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/trigger/redissub",
   "settings": [
   ],

@@ -57,6 +57,7 @@ func Invoke() (interface{}, error) {
 
 func run(t *RedisTrigger) error {
 	syslog.Println("run")
+	return nil
 }
 
 
