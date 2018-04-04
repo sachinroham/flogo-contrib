@@ -7,16 +7,14 @@ import (
 	"github.com/TIBCOSoftware/flogo-lib/core/trigger"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 
-	// Import the aws-lambda-go. Required for dep to pull on app create
-	_ "github.com/aws/aws-lambda-go/lambda"
 )
 
 // log is the default package logger
-var log = logger.GetLogger("trigger-flogo-lambda")
-var singleton *LambdaTrigger
+var log = logger.GetLogger("trigger-flogo-Redis")
+var singleton *RedisTrigger
 
-// LambdaTrigger AWS Lambda trigger struct
-type LambdaTrigger struct {
+// RedisTrigger AWS Redis trigger struct
+type RedisTrigger struct {
 	metadata *trigger.Metadata
 	config   *trigger.Config
 	handlers []*trigger.Handler
@@ -24,45 +22,45 @@ type LambdaTrigger struct {
 
 //NewFactory create a new Trigger factory
 func NewFactory(md *trigger.Metadata) trigger.Factory {
-	return &LambdaFactory{metadata: md}
+	return &RedisFactory{metadata: md}
 }
 
-// LambdaFactory AWS Lambda Trigger factory
-type LambdaFactory struct {
+// RedisFactory AWS Redis Trigger factory
+type RedisFactory struct {
 	metadata *trigger.Metadata
 }
 
 //New Creates a new trigger instance for a given id
-func (t *LambdaFactory) New(config *trigger.Config) trigger.Trigger {
-	singleton = &LambdaTrigger{metadata: t.metadata, config: config}
+func (t *RedisFactory) New(config *trigger.Config) trigger.Trigger {
+	singleton = &RedisTrigger{metadata: t.metadata, config: config}
 	return singleton
 }
 
 // Metadata implements trigger.Trigger.Metadata
-func (t *LambdaTrigger) Metadata() *trigger.Metadata {
+func (t *RedisTrigger) Metadata() *trigger.Metadata {
 	return t.metadata
 }
 
-func (t *LambdaTrigger) Initialize(ctx trigger.InitContext) error {
+func (t *RedisTrigger) Initialize(ctx trigger.InitContext) error {
 	t.handlers = ctx.GetHandlers()
 	return nil
 }
 
 func Invoke() (interface{}, error) {
 
-	log.Info("Starting AWS Lambda Trigger")
-	syslog.Println("Starting AWS Lambda Trigger")
+	log.Info("Starting AWS Redis Trigger")
+	syslog.Println("Starting AWS Redis Trigger")
 
 	return nil,nil
 }
 
-func (t *LambdaTrigger) Start() error {
+func (t *RedisTrigger) Start() error {
 	syslog.Println("Start")
 	return nil
 }
 
 // Stop implements util.Managed.Stop
-func (t *LambdaTrigger) Stop() error {
+func (t *RedisTrigger) Stop() error {
 	syslog.Println("Stop")
 	return nil
 }
