@@ -2,7 +2,7 @@ package redissub
 
 import (
 	syslog "log"
-
+	"context"
 	"github.com/TIBCOSoftware/flogo-lib/core/trigger"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
@@ -52,13 +52,27 @@ func (t *RedisTrigger) Start() error {
 	syslog.Println("Processing handlers")
 	for _, handler := range handlers {
 
-		syslog.Println("Init Hadler",handler)
-		
+		syslog.Println("Init Hadler", handler)
+		t.processMessage(handler)
 	}
 
 	return nil
+
+}
+
+func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
+	syslog.Println("Inside processMessage")
+
+	fn := func() {
+		syslog.Println("Executing \"Once\" timer trigger")
+
+		_, err := endpoint.Handle(context.Background(), nil)
+		if err != nil {
+			syslog.Println("Error running handler: ", err.Error())
+		}
+	}
 	
-	return nil
+	fn()
 }
 
 // Stop implements util.Managed.Stop
