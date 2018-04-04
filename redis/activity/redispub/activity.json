@@ -5,7 +5,7 @@
 	"version": "0.0.1",
 	"title": "FTP GET",
 	"description": "FTP GET",
-	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/ftp/retr",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/activity/redispub",
 	"input": [
 		{
 			"name": "host",
@@ -15,11 +15,6 @@
 		{
 			"name": "port",
 			"type": "integer",
-			"required": false
-		},
-		{
-			"name": "user",
-			"type": "string",
 			"required": true
 		},
 		{
@@ -28,12 +23,12 @@
 			"required": false
 		},
 		{
-			"name": "localpath",
+			"name": "channel",
 			"type": "string",
-			"required": false
+			"required": true
 		},
 		{
-			"name": "remotepath",
+			"name": "message",
 			"type": "string",
 			"required": true
 		}
