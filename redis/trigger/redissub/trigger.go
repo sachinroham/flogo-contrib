@@ -43,6 +43,7 @@ func (t *RedisTrigger) Metadata() *trigger.Metadata {
 
 func (t *RedisTrigger) Initialize(ctx trigger.InitContext) error {
 	t.handlers = ctx.GetHandlers()
+	syslog.Println("init")
 	return nil
 }
 
@@ -53,6 +54,11 @@ func Invoke() (interface{}, error) {
 
 	return nil,nil
 }
+
+func run(t *RedisTrigger) error {
+	syslog.Println("run")
+}
+
 
 func (t *RedisTrigger) Start() error {
 	syslog.Println("Start")
