@@ -45,20 +45,19 @@ func (t *RedisTrigger) Metadata() *trigger.Metadata {
 func (t *RedisTrigger) Initialize(ctx trigger.InitContext) error {
 	t.handlers = ctx.GetHandlers()
 	syslog.Println("init")
-	return nil
-}
-
-func (t *RedisTrigger) Start() error {
-	syslog.Println("Start")
-	handlers := t.handlers
-
 	syslog.Println("Processing handlers")
-	for _, handler := range handlers {
+	for _, handler := range t.handlers {
 
 		syslog.Println("Init Hadler", handler)
 		t.processMessage(handler)
 	}
 
+	return nil
+}
+
+func (t *RedisTrigger) Start() error {
+	syslog.Println("Start")
+	
 	return nil
 
 }
@@ -75,14 +74,6 @@ func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 	pubsub := client.Subscribe("redisChat")
 	defer pubsub.Close()
 
-	fn := func() {
-		syslog.Println("Executing \"Once\" timer trigger")
-
-		_, err := endpoint.Handle(context.Background(), nil)
-		if err != nil {
-			syslog.Println("Error running handler: ", err.Error())
-		}
-	}
 	for {
 		// ReceiveTimeout is a low level API. Use ReceiveMessage instead.
 		msgi, err := pubsub.ReceiveTimeout(time.Second)
@@ -94,11 +85,19 @@ func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 		switch msg := msgi.(type) {
 		case *redis.Message:
 			syslog.Println("received", msg.Payload, "from", msg.Channel)
-			fn()
+			syslog.Println("Executing \"Once\" timer trigger")
+			data := map[string]interface{}{
+				"context": msg.Payload,
+				"evt":     msg.Payload,
+			}
+			_, err := endpoint.Handle(context.Background(), data)
+			if err != nil {
+				syslog.Println("Error running handler: ", err.Error())
+			}
 		default:
 		}
 	}
-	
+
 }
 
 // Stop implements util.Managed.Stop
