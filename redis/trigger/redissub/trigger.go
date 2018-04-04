@@ -1,8 +1,11 @@
 package redissub
 
 import (
-	syslog "log"
 	"context"
+	"github.com/go-redis/redis"
+	syslog "log"
+	"time"
+
 	"github.com/TIBCOSoftware/flogo-lib/core/trigger"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
@@ -63,6 +66,15 @@ func (t *RedisTrigger) Start() error {
 func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 	syslog.Println("Inside processMessage")
 
+	client := redis.NewClient(&redis.Options{
+		Addr:     "127.0.0.1:6379",
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
+
+	pubsub := client.Subscribe("redisChat")
+	defer pubsub.Close()
+
 	fn := func() {
 		syslog.Println("Executing \"Once\" timer trigger")
 
@@ -71,8 +83,22 @@ func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 			syslog.Println("Error running handler: ", err.Error())
 		}
 	}
+	for {
+		// ReceiveTimeout is a low level API. Use ReceiveMessage instead.
+		msgi, err := pubsub.ReceiveTimeout(time.Second)
+		if err != nil {
+			//			fmt.Println("err ",err )
+			//			break
+		}
+
+		switch msg := msgi.(type) {
+		case *redis.Message:
+			syslog.Println("received", msg.Payload, "from", msg.Channel)
+			fn()
+		default:
+		}
+	}
 	
-	fn()
 }
 
 // Stop implements util.Managed.Stop
