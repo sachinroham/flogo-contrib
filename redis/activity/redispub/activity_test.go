@@ -43,7 +43,6 @@ var password = ""
 var channel = "redisChat"
 var message = "Redis is a great caching technique"
 
-
 func TestListFiles(t *testing.T) {
 
 	act := NewActivity(getActivityMetadata())

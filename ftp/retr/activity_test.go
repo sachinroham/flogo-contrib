@@ -43,7 +43,6 @@ var password = "admin"
 var localpath = "temp.txt"
 var remotepath = "temp.txt"
 
-
 func TestListFiles(t *testing.T) {
 
 	act := NewActivity(getActivityMetadata())

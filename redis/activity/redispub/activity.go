@@ -1,9 +1,9 @@
 package redispub
 
 import (
-	"strconv"
-"fmt"
+	"fmt"
 	"github.com/go-redis/redis"
+	"strconv"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
@@ -52,8 +52,8 @@ func (a *REDISPUBActivity) Eval(context activity.Context) (done bool, err error)
 		Password: "" + password, // no password set
 		DB:       0,             // use default DB
 	})
-	
-	fmt.Println("Data ", host + ":" + strconv.Itoa(port))
+
+	fmt.Println("Data ", host+":"+strconv.Itoa(port))
 	resp, err := client.Publish(channel, message).Result()
 	if err != nil {
 		panic(err)

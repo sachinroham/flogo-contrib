@@ -1,7 +1,6 @@
 package retr
 
 import (
-
 	"fmt"
 	"io"
 	"strconv"
@@ -76,7 +75,7 @@ func (a *STORActivity) Eval(context activity.Context) (done bool, err error) {
 	}
 
 	buffer := make([]byte, 1024)
-	
+
 	if _, err := io.ReadFull(resp, buffer); err != nil {
 		fmt.Println("error:", err)
 	}

@@ -1,10 +1,10 @@
 ---
-title: FTP PUT
+title: FTP GET
 weight: 4618
 ---
 
-# FTP PUT
-This activity invokes a FTP PUT command.
+# FTP GET
+This activity invokes a FTP GET command.
 
 ## Installation
 

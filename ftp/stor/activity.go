@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"strings"	
 	"strconv"
-	
+	"strings"
+
 	"github.com/jlaffaye/ftp"
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
@@ -59,8 +59,8 @@ func (a *STORActivity) Eval(context activity.Context) (done bool, err error) {
 
 	//	log.Debugf("STORActivity Call: [%s] %s\n", host, pageSize)
 	//	fmt.Printf("STORActivity Call: [%s] %v\n", authorizatonCode, pageSize)
-	
-	client, err := ftp.Dial(strings.Join([]string{host,strconv.Itoa(port)},":"))
+
+	client, err := ftp.Dial(strings.Join([]string{host, strconv.Itoa(port)}, ":"))
 
 	if err != nil {
 		fmt.Printf("err %v", err)
