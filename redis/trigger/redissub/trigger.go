@@ -71,7 +71,7 @@ func (t *RedisTrigger) processMessage(endpoint *trigger.Handler) {
 		DB:       0,                                    // use default DB
 	})
 
-	pubsub := client.Subscribe("redisChat")
+	pubsub := client.Subscribe(t.config.GetSetting("channel"))
 	defer pubsub.Close()
 
 	for {
