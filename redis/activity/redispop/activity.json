@@ -1,0 +1,37 @@
+{
+	"name": "redis-pop",
+	"type": "flogo:activity",
+	"ref": "github.com/sachinroham/flogo-contrib/redis/activity/redispop",
+	"version": "0.0.1",
+	"title": "Redis Pop",
+	"description": "Redis Pop",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/activity/redispop",
+	"input": [
+		{
+			"name": "host",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "port",
+			"type": "integer",
+			"required": true
+		},
+		{
+			"name": "password",
+			"type": "string",
+			"required": false
+		},
+		{
+			"name": "key",
+			"type": "string",
+			"required": true
+		}
+	],
+	"output": [
+		{
+			"name": "result",
+			"type": "string"
+		}
+	]
+}

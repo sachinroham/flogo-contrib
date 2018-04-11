@@ -1,0 +1,42 @@
+{
+	"name": "redis-push",
+	"type": "flogo:activity",
+	"ref": "github.com/sachinroham/flogo-contrib/redis/activity/redispush",
+	"version": "0.0.1",
+	"title": "Redis Push",
+	"description": "Redis Push",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/activity/redispush",
+	"input": [
+		{
+			"name": "host",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "port",
+			"type": "integer",
+			"required": true
+		},
+		{
+			"name": "password",
+			"type": "string",
+			"required": false
+		},
+		{
+			"name": "key",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "message",
+			"type": "string",
+			"required": true
+		}
+	],
+	"output": [
+		{
+			"name": "result",
+			"type": "string"
+		}
+	]
+}
