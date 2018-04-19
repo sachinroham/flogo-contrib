@@ -1,0 +1,42 @@
+{
+	"name": "redis-lindex",
+	"type": "flogo:activity",
+	"ref": "github.com/sachinroham/flogo-contrib/redis/activity/redislindex",
+	"version": "0.0.1",
+	"title": "Redis LINDEX",
+	"description": "Redis LINDEX",
+	"homepage": "https://github.com/sachinroham/flogo-contrib/tree/master/redis/activity/redislindex",
+	"input": [
+		{
+			"name": "host",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "port",
+			"type": "integer",
+			"required": true
+		},
+		{
+			"name": "password",
+			"type": "string",
+			"required": false
+		},
+		{
+			"name": "key",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "index",
+			"type": "integer",
+			"required": true
+		}
+	],
+	"output": [
+		{
+			"name": "result",
+			"type": "string"
+		}
+	]
+}
